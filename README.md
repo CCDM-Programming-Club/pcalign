@@ -66,8 +66,9 @@ Packaging python projects up basically boils down to some folder structure,
 
 Creating your own module is as simple as putting your script in a folder, and
 putting an `__init__.py` file in the same folder. The `__init__.py` file can
-just be empty, because it just tells python that this folder is something you
-want to be able to import.
+just be empty because it just tells python that this folder is something you
+want to be able to import. In this code the `__init__.py` file contains the
+code for running our command line version of the progam.
 
 Mimicking this project should get you pretty far, but for more information
 check out the official [python packaging user guide](https://packaging.python.org)
