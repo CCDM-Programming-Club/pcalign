@@ -24,15 +24,15 @@ setup(
     # https://packaging.python.org/en/latest/single_source_version.html
     version='0.0.1',
 
-    description='An aligner to ..',
+    description='An aligner to ...',
     long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/CurtinIC/BioDendro',
+    url='https://github.com/CCDM-Programming-Club/pcalign',
 
     # Author details
-    author='Catherine Rawlinson',
-    author_email='catherine.rawlinson@curtin.edu.au',
+    author='Darcy Jones',
+    author_email='darcy.a.jones@postgrad.curtin.edu.au',
 
     # Choose your license
     #license='BSD',
@@ -93,7 +93,7 @@ setup(
     # installed, specify them here.  If using Python 2.6 or less, then these
     # have to be included in MANIFEST.in as well.
     #package_data={
-    #    'biodendro': ['data/*.json', 'data/*.csv', 'data/*.pkl'],
+    #    'pcalign': ['data/*.json', 'data/*.csv', 'data/*.pkl'],
     #},
     #include_package_data=True,
     # Although 'package_data' is the preferred approach, in some case you may
