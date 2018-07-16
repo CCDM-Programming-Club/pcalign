@@ -6,7 +6,6 @@ the description in this wikipedia article <https://en.wikipedia.org/wiki/Needlem
 It is mostly intended as a learning exercise for some ways of structuring
 python programs and some of the tooling that goes along with that.
 
-
 Briefly, a NW aligner takes two sequences and finds all optimal alignments that
 cover all of both sequences (a global alignment). Optimality is decided based
 on some scoring system, and it is possible to have multiple alignments with the
@@ -32,6 +31,10 @@ pip install -e .
 
 # Run the program
 pcalign -1 example/example1.fasta -2 example/example2.fasta
+
+# Get available command line arguments
+
+pcalign --help
 ```
 
 You should also be able to import the modules from within python, e.g.
@@ -48,8 +51,6 @@ with open("example/example2.fasta") as handle:
 
 alignments = align(seq1, seq2, 1, -1, -1)
 ```
-
-Have a look at the source code for more on what these do.
 
 To run the tests, do:
 
@@ -70,25 +71,24 @@ just be empty because it just tells python that this folder is something you
 want to be able to import. In this code the `__init__.py` file contains the
 code for running our command line version of the progam.
 
-Mimicking this project should get you pretty far, but for more information
-check out the official [python packaging user guide](https://packaging.python.org)
-which contains, a great basic tutorial <https://packaging.python.org/tutorials/packaging-projects/>.
+Mimicking the layout of this project should get you pretty far, but for more
+information check out the official [python packaging user guide](https://packaging.python.org)
+which contains a great simple tutorial <https://packaging.python.org/tutorials/packaging-projects/>.
 
-One nice aspect of pip is that you can install the package and still edit it, 
-and use those changes.
-
-The command:
+One nice aspect of pip is that you can install the package, edit it, 
+and then use those changes.
 
 ```python
 pip install -e .
 ```
 
-Tells python to install the current directory (i.e. `.`) as a package, but
+This tells python to install the current directory (i.e. `.`) as a package, but
 allow us to use the edits in the installed version `-e`.
-So you could open a jupyter notebook and play with the package, then edit the
-package, and to use those new edits, you just need to reload the package or
-restart the notebook. Same goes for scripts.
-N.B. pip requires the `setup.py` file to work properly.
+So you could open a jupyter notebook and play with the package, edit the
+package, and to use those new edits within the same jupyter notebook.
+You just need to reload the package or restart the notebook.
+Same goes for running scripts..
+N.B. `pip` requires the `setup.py` file to work properly (see below).
 
 
 ## Packaging command line scripts.
@@ -99,26 +99,33 @@ We're using a parameter called `entrypoints` in the `setup.py` to tell pip to do
 
 To learn more about this, check out <http://python-packaging.readthedocs.io/en/latest/command-line-scripts.html>.
 
+Note that if you change or add new entry-points, this will not automatically
+be updated if you're using the `pip install -e` trick. In that case you need to
+reinstall the package.
 
 ## Unit-tests
 
 Testing your code seems like a waste of time, until you come to use it again in
-six months, or you realise that your output was all wrong.
+six months or you realise that your output was all wrong.
 
-Save yourself and the community from this pain with unit-tests.
-Testing is a big concept and I wouldn't claim to be an expert at it, so
-you might need to do some googling. The concepty are not python specific so
-pick something that explains the ideas well for you. There are a lot of good
-presentations on youtube too.
+Save yourself and the community from this pain with unit-tests!
+Testing is a big concept, but I think that wikipedia <https://en.wikipedia.org/wiki/Unit_testing>
+and Jeff Knupp <https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing/>
+introduce the topic in a fairly easy to understand way.
+The concepts are not python specific so if you find something else that explains the ideas well for you go for it!
+There are a lot of good presentations on youtube too.
 
-The basic idea of unit-tests is that you test the small functions and methods
+The basic narrow scope idea of unit-tests is that you test the small functions and methods
 that you use to create the big functions or your overall script. If you've
 got those core bits right, then the big bits that piece those small bits
-together are more likely to work. It's much easier to test the small functions
-because they don't take long to run, and it's easier to figure out how those
-functions might come up with the right answer and write a test to make sure
-you handle that in your code.
-
+together are more likely to work (and you can test those too).
+It's much easier to test the small functions because they don't take long to run,
+and it's easier to figure out how those functions might come up with the
+wrong answer and write a test to make sure you handle that in your code.
+Writing tests for your code can also push you towards writing better
+and more maintainable code. Writing test-able code usually means writing shorter
+functions, avoiding modifying global variables, and actually thinking about how
+you (or the user) will use a function.
 
 For python, I find [pytest](https://docs.pytest.org/en/latest/) to be the easiest testing library.
 You can have a look at the test files in the `test` folder.
@@ -147,6 +154,7 @@ and we use DEBUG level logging to help us understand what's happening where.
 
 We control the level of the logging output (e.g. do we want to show DEBUG, INFO, or neither?),
 using a command line flag `-v`.
+To see the full debugging output with the script, use the `-v` flag twice (i.e. `-vv` or `-v -v`).
 
 I've also used a python decorator function to automatically log the input and output
 of functions.
