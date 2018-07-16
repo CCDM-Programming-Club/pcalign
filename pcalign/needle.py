@@ -34,12 +34,6 @@ def construct_matrix(seq1, seq2):
            [0., 0., 0., 0., 0.]])
     """
 
-    output = []
-    for _ in range(len(seq1) + 1):
-        output.append([0] * (len(seq2) + 1))
-        # FYI be careful with the [0] * x solution.
-        # If your element in the list is mutable, you'll
-        # just duplicate the pointer.
     return np.zeros((len(seq1) + 1, len(seq2) + 1))
 
 
